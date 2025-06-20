@@ -1,5 +1,3 @@
-#! /usr/bin/env python3
-
 import math
 import os
 from random import randint
@@ -141,10 +139,10 @@ def cargar_imagenes():
 
     return {
         'fondo': cargar_imagen('background.png'),
-        'extremo_tubo': cargar_imagen('pipe_end.png'),
-        'cuerpo_tubo': cargar_imagen('pipe_body.png'),
-        'pajaro_alas_arriba': cargar_imagen('bird_wing_up.png'),
-        'pajaro_alas_abajo': cargar_imagen('bird_wing_down.png')
+        'extremo_tubo': cargar_imagen('tuberia_final.png'),
+        'cuerpo_tubo': cargar_imagen('tuberia_base.png'),
+        'pajaro_alas_arriba': cargar_imagen('pajaro2.png'),
+        'pajaro_alas_abajo': cargar_imagen('pajaro1.png')
     }
 
 def cuadros_a_mseg(cuadros, fps=FPS):
@@ -156,7 +154,7 @@ def mseg_a_cuadros(mseg, fps=FPS):
 def principal():
     pygame.init()
     superficie = pygame.display.set_mode((ANCHO_VENTANA, ALTO_VENTANA))
-    pygame.display.set_caption('Pygame Flappy Bird')
+    pygame.display.set_caption('Juego Testing - Flappy Bird')
     reloj = pygame.time.Clock()
     fuente_puntaje = pygame.font.SysFont(None, 32, bold=True)
     imagenes = cargar_imagenes()
@@ -183,7 +181,7 @@ def principal():
             continue
         if any(t.colisiona_con(pajaro) for t in tubos) or pajaro.y <= 0 or pajaro.y >= ALTO_VENTANA - Pajaro.ALTO:
             terminado = True
-        for x in (0, ANCHO_VENTANA / 2):
+        for x in (0, ANCHO_VENTANA):
             superficie.blit(imagenes['fondo'], (x, 0))
         while tubos and not tubos[0].visible:
             tubos.popleft()
@@ -202,7 +200,7 @@ def principal():
         pygame.display.flip()
         reloj_cuadros += 1
 
-    print('¡Juego terminado! Puntaje: %i' % puntaje)
+    print('Juego terminado! Puntaje: %i' % puntaje)
     pygame.quit()
 
 if __name__ == '__main__':  
