@@ -71,3 +71,17 @@ class PruebaUtilidades(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+#ATDD
+
+def test_pajaro_fuera_de_pantalla():
+    pajaro = Pajaro(50, ALTO_VENTANA - Pajaro.ALTO / 2, 0,
+                    (pygame.Surface((32, 32)), pygame.Surface((32, 32))))
+    pajaro.y = ALTO_VENTANA + 1
+    assert pajaro.y > ALTO_VENTANA - Pajaro.ALTO
+
+def test_tubo_fuera_de_pantalla():
+    tubo = ParTubo(pygame.Surface((80, 32)), pygame.Surface((80, 32)))
+    tubo.x = -ParTubo.ANCHO - 1
+    assert not tubo.visible
