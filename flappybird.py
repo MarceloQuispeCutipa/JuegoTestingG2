@@ -7,13 +7,13 @@ from pygame.locals import *
 
 FPS = 60
 VELOCIDAD_ANIMACION = 0.18
-ANCHO_VENTANA = 284 * 2
+ANCHO_VENTANA = 568
 ALTO_VENTANA = 512
 
 class Pajaro(pygame.sprite.Sprite):
     ANCHO = ALTO = 32
-    VELOCIDAD_CAIDA = 0.18
-    VELOCIDAD_SUBIDA = 0.3
+    VELOCIDAD_CAIDA = 0.10
+    VELOCIDAD_SUBIDA = 0.2
     DURACION_SUBIDA = 333.3
 
     def __init__(self, x, y, mseg_para_subir, imagenes):
@@ -139,10 +139,10 @@ def cargar_imagenes():
 
     return {
         'fondo': cargar_imagen('background.png'),
-        'extremo_tubo': cargar_imagen('tuberia_final.png'),
+        'tubo_base': cargar_imagen('tuberia_final.png'),
         'cuerpo_tubo': cargar_imagen('tuberia_base.png'),
-        'pajaro_alas_arriba': cargar_imagen('pajaro2.png'),
-        'pajaro_alas_abajo': cargar_imagen('pajaro1.png')
+        'bird_up': cargar_imagen('pajaro2.png'),
+        'bird_down': cargar_imagen('pajaro1.png')
     }
 
 def cuadros_a_mseg(cuadros, fps=FPS):
@@ -159,7 +159,7 @@ def principal():
     fuente_puntaje = pygame.font.SysFont(None, 32, bold=True)
     imagenes = cargar_imagenes()
     pajaro = Pajaro(50, int(ALTO_VENTANA / 2 - Pajaro.ALTO / 2), 2,
-                    (imagenes['pajaro_alas_arriba'], imagenes['pajaro_alas_abajo']))
+                    (imagenes['bird_up'], imagenes['bird_down']))
     tubos = deque()
     reloj_cuadros = 0
     puntaje = 0
@@ -168,7 +168,7 @@ def principal():
     while not terminado:
         reloj.tick(FPS)
         if not (pausado or reloj_cuadros % mseg_a_cuadros(ParTubo.INTERVALO_AGREGAR)):
-            tubos.append(ParTubo(imagenes['extremo_tubo'], imagenes['cuerpo_tubo']))
+            tubos.append(ParTubo(imagenes['tubo_base'], imagenes['cuerpo_tubo']))
         for evento in pygame.event.get():
             if evento.type == QUIT or (evento.type == KEYUP and evento.key == K_ESCAPE):
                 terminado = True
