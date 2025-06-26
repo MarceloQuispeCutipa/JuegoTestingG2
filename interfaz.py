@@ -91,7 +91,8 @@ def instrucciones():
     while True:
         ventana.blit(fondo, (0, 0))
         mostrar_texto_centrada("Usa espacio o clic para volar", 0)
-        mostrar_texto_centrada("Evita los tubos", 50)
+        mostrar_texto_centrada("Evita chocar con los tubos", 50)
+        mostrar_texto_centrada("Consigue el mayo puntaje", 50)
         pygame.display.flip()
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
