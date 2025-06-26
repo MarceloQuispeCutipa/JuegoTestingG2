@@ -94,3 +94,44 @@ def test_tubo_fuera_de_pantalla():
     tubo = ParTubo(pygame.Surface((80, 32)), pygame.Surface((80, 32)))
     tubo.x = -ParTubo.ANCHO - 1
     assert not tubo.visible
+
+#BDD
+
+def test_scenario_pajaro_sube_y_cae():
+    
+    #Scenario: Pájaro sube y luego cae
+    #Given el pájaro con mseg_para_subir = Pajaro.DURACION_SUBIDA
+    #When se llama a actualizar 5 veces
+    #Then la posición y del pájaro primero disminuye y luego aumenta
+    
+    # Given
+    ala_up = pygame.Surface((32, 32)).convert_alpha()
+    ala_down = pygame.Surface((32, 32)).convert_alpha()
+    pajaro = Pajaro(50, 100, Pajaro.DURACION_SUBIDA, (ala_up, ala_down))
+    # When
+    posiciones = []
+    for _ in range(5):
+        pajaro.actualizar()
+        posiciones.append(pajaro.y)
+    # Then
+    assert posiciones[0] < 100, "El pájaro debería subir al inicio"
+    assert posiciones[-1] > posiciones[2], "El pájaro debería caer después del pico"
+
+def test_scenario_tubo_generacion_y_visibilidad():
+    #Scenario: Generación de tubos y visibilidad
+    #Given un ParTubo recién creado
+    #When se actualiza su posición hasta fuera de la pantalla
+    #Then tube.visible pasa de True a False
+     
+    # Given
+    img_ext = pygame.Surface((80, 32)).convert_alpha()
+    img_cuerpo = pygame.Surface((80, 32)).convert_alpha()
+    tubo = ParTubo(img_ext, img_cuerpo)
+    # When
+    vis_inicial = tubo.visible
+    tubo.x = -ParTubo.ANCHO - 1
+    vis_final = tubo.visible
+    # Then
+    assert vis_inicial is True, "El tubo debe ser visible recién creado"
+    assert vis_final is False, "El tubo no debe ser visible una vez fuera de pantalla"
+    

@@ -124,8 +124,8 @@ class ParTubo(pygame.sprite.Sprite):
     def mask(self):
         return self._mascara
 
-    def actualizar(self, cuadros_delta=1):
-        self.x -= VELOCIDAD_ANIMACION * cuadros_a_mseg(cuadros_delta)
+    def actualizar(self, cuadros_delta=1, velocidad=VELOCIDAD_ANIMACION):
+        self.x -= velocidad * cuadros_a_mseg(cuadros_delta)
 
     def colisiona_con(self, pajaro):
         return pygame.sprite.collide_mask(self, pajaro)
@@ -186,7 +186,8 @@ def principal():
         while tubos and not tubos[0].visible:
             tubos.popleft()
         for t in tubos:
-            t.actualizar()
+            VELOCIDAD_BASE = VELOCIDAD_ANIMACION + (puntaje // 5) * 0.03
+            t.actualizar(velocidad=VELOCIDAD_BASE)
             superficie.blit(t.image, t.rect)
         pajaro.actualizar()
         superficie.blit(pajaro.image, pajaro.rect)
@@ -201,7 +202,4 @@ def principal():
         reloj_cuadros += 1
 
     print('Juego terminado! Puntaje: %i' % puntaje)
-    pygame.quit()
-
-if __name__ == '__main__':  
-    principal()
+    return puntaje
