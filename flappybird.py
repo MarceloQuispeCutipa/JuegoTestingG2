@@ -7,8 +7,8 @@ from pygame.locals import *
 
 FPS = 60
 VELOCIDAD_ANIMACION = 0.18
-ANCHO_VENTANA = 568
-ALTO_VENTANA = 512
+ANCHO_VENTANA = 1080
+ALTO_VENTANA = 720
 
 class Pajaro(pygame.sprite.Sprite):
     ANCHO = ALTO = 32
@@ -201,5 +201,4 @@ def principal():
         pygame.display.flip()
         reloj_cuadros += 1
 
-    print('Juego terminado! Puntaje: %i' % puntaje)
     return puntaje
