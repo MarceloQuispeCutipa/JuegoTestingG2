@@ -90,9 +90,9 @@ def instrucciones():
     fondo = pygame.transform.scale(fondos["instrucciones"], (ANCHO, ALTO))
     while True:
         ventana.blit(fondo, (0, 0))
-        mostrar_texto_centrada("Usa espacio o clic para volar", 0)
+        mostrar_texto_centrada("Usa espacio o clic para volar", -30)
         mostrar_texto_centrada("Evita chocar con los tubos", 50)
-        mostrar_texto_centrada("Consigue el mayo puntaje", 50)
+        mostrar_texto_centrada("Consigue el mayo puntaje", 120)
         pygame.display.flip()
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -108,7 +108,7 @@ def pantalla_final(puntaje):
         ventana.blit(fondo, (0, 0))
         mostrar_texto_centrada(f"PUNTAJE FINAL: {puntaje}", 0)
         r_volver = mostrar_texto_centrada("Volver a jugar", 50)
-        r_salir = mostrar_texto_centrada("Salir", 100)
+        r_salir = mostrar_texto_centrada("Volver al Menú", 100)
         pygame.display.flip()
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
